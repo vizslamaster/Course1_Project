@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ShoeStore</string>
+    <string name="editUsernameText">Please enter your username</string>
+    <string name="editPasswordText">Please enter your password</string>
+    <string name="login_text">Login</string>
+    <string name="CreateAccount">Create Account</string>
+    <string name="Login">Login</string>
 </resources>
