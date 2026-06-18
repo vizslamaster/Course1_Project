@@ -12,9 +12,21 @@ class ShoeViewModel : ViewModel() {
     val shoeList: LiveData<MutableList<com.udacity.shoestore.models.Shoe>>
         get() = _shoeList
 
-    fun addShoe(shoe: Shoe) {
-        _shoeList.value?.add(shoe)
-        // Refresh the LiveData value to trigger observers
+    init {
+        loadShoes()
+    }
+
+    private fun loadShoes() {
+        val initialShoes = mutableListOf(
+            Shoe("Air Max 270", "Nike", "270", "Best for running"),
+            Shoe("Ultraboost 22", "Reebok", "350", "Best for walking"),
+            Shoe("Classic Leather", "Adidas", "380", "Best for gym wear")
+        )
+        _shoeList.value = initialShoes
+    }
+
+    fun addShoe(newShoe: Shoe) {
+        _shoeList.value?.add(newShoe)
         _shoeList.value = _shoeList.value
     }
 }

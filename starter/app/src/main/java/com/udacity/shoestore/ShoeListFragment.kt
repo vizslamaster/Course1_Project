@@ -10,56 +10,37 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.setPadding
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
+import com.udacity.shoestore.models.Shoe
+import android.widget.LinearLayout
 
-//class ShoeListFragment : Fragment() {
-//
-//    companion object {
-//        fun newInstance() = ShoeListFragment()
-//    }
-//
-//    private val viewModel: ShoeListViewModel by viewModels()
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        // TODO: Use the ViewModel
-//    }
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View {
-//        return inflater.inflate(R.layout.fragment_shoe_list, container, false)
-//    }
-//}
 
 class ShoeListFragment : Fragment() {
 
-    private val viewModel: ShoeListViewModel by activityViewModels<ShoeListViewModel>()
+    private val viewModel: ShoeViewModel by activityViewModels<ShoeViewModel>()
     private lateinit var binding: FragmentShoeListBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_shoe_list, container, false)
 
-        // Observe the shoe list LiveData
+
         viewModel.shoeList.observe(viewLifecycleOwner) { shoes ->
             updateShoeList(shoes)
         }
 
-        // Navigate to Shoe Detail screen
         binding.addShoeFab.setOnClickListener {
             findNavController().navigate(ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment())
         }
-
-
-        setHasOptionsMenu(true)
 
         return binding.root
     }
@@ -72,28 +53,32 @@ class ShoeListFragment : Fragment() {
 
     // 3. Handle the click action
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.loginFragment -> {
-                // Navigate back to Login
-                findNavController().navigate(ShoeListFragmentDirections.actionShoeListFragmentToLoginFragment())
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+        if (item.itemId == R.id.loginFragment) { // Match your menu ID
+            findNavController().navigate(ShoeListFragmentDirections.actionShoeListFragmentToLoginFragment())
+            return true
         }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun updateShoeList(shoes: List<Shoe>) {
-        val container = binding.shoeListContainer
-        container.removeAllViews() // Clear old views to prevent duplicates
+        val container =
+            binding.shoeListContainer
+        container.removeAllViews()
 
-        for (shoe in shoes) {
-            // Programmatically create a simple TextView or inflate a custom item layout
-            val textView = TextView(context).apply {
-                text = "${shoe.name}"
+        for (singleShoe in shoes) {
+            val shoeItemView = TextView(context).apply {
+                text =
+                    "Name: ${singleShoe.name}\n" +
+                            "Company: ${singleShoe.company}\n" +
+                            "Size: ${singleShoe.size}\n---"
                 textSize = 18f
-                setPadding(0, 0, 0, 32)
+                setPadding(20, 20, 20, 20)
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
             }
-            container.addView(textView)
+            container.addView(shoeItemView)
         }
     }
 }

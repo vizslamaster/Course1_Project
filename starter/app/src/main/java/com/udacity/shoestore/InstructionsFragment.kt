@@ -19,12 +19,9 @@ class InstructionsFragment : Fragment() {
         fun newInstance() = InstructionsFragment()
     }
 
-    //private val viewModel: InstructionsViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // TODO: Use the ViewModel
     }
 
     override fun onCreateView(

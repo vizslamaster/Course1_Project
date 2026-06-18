@@ -15,7 +15,6 @@ import com.udacity.shoestore.models.Shoe
 
 class ShoeDetailFragment : Fragment() {
 
-    // 1. Get a reference to the shared ViewModel (scoped to the Activity)
     private val viewModel: ShoeViewModel by activityViewModels()
 
     private lateinit var binding: FragmentShoeDetailBinding
@@ -25,27 +24,23 @@ class ShoeDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // 2. Inflate the layout using Data Binding
+
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_shoe_detail, container, false
         )
 
-        // 3. Create a blank Shoe object to hold the data from the EditTexts
-        // This matches the variable 'shoeViewModel' you defined in your XML
         val newShoe = Shoe("", "", "", "")
         binding.shoe = newShoe
 
-        // 4. Set up the Save Button
         binding.saveButton.setOnClickListener {
-            // Add the shoe that was updated via two-way data binding to our list
             viewModel.addShoe(newShoe)
-            // Navigate back to the Shoe List
+
             findNavController().navigateUp()
         }
 
-        // 5. Set up the Cancel Button
+
         binding.cancelButton.setOnClickListener {
-            // Just go back without saving anything
+
             findNavController().navigateUp()
         }
 
