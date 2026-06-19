@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Chosen ConstraintLayout to allow for flexible and precise positioning of the welcome text
+             and the continue button relative to the screen boundaries, maintaining a flat view
+             hierarchy while centering content. -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/editUsernameText"
         android:layout_width="match_parent"

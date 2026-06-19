@@ -2,6 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!-- Chosen a ScrollView with a nested LinearLayout because the shoe list is dynamic;
+      the LinearLayout acts as a simple vertical container that allows us to
+      programmatically add child views (shoes) using the addView() method. -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

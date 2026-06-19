@@ -18,9 +18,9 @@ class ShoeViewModel : ViewModel() {
 
     private fun loadShoes() {
         val initialShoes = mutableListOf(
-            Shoe("Air Max 270", "Nike", "270", "Best for running"),
-            Shoe("Ultraboost 22", "Reebok", "350", "Best for walking"),
-            Shoe("Classic Leather", "Adidas", "380", "Best for gym wear")
+            Shoe("Air Max 270", "270", "Nike",  "Best for running"),
+            Shoe("Ultraboost 22", "350", "Reebok",  "Best for walking"),
+            Shoe("Classic Leather", "380", "Adidas",  "Best for gym wear")
         )
         _shoeList.value = initialShoes
     }

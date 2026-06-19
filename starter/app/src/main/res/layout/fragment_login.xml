@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Chosen ConstraintLayout to center the login form elements and align
+       the labels with the input fields across various screen sizes
+       without needing nested layout structures. -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/editUsernameText"
         android:layout_width="match_parent"
@@ -10,7 +13,6 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         tools:context=".LoginFragment">
-
 
         <EditText
             android:id="@+id/editTextEmailAddress"

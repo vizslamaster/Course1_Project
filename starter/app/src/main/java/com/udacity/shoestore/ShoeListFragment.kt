@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
 import com.udacity.shoestore.models.Shoe
 import android.widget.LinearLayout
+import com.udacity.shoestore.databinding.ListItemShoeBinding
 
 
 class ShoeListFragment : Fragment() {
@@ -51,9 +52,8 @@ class ShoeListFragment : Fragment() {
         inflater.inflate(R.menu.shoe_list_menu, menu)
     }
 
-    // 3. Handle the click action
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.loginFragment) { // Match your menu ID
+        if (item.itemId == R.id.loginFragment) {
             findNavController().navigate(ShoeListFragmentDirections.actionShoeListFragmentToLoginFragment())
             return true
         }
@@ -61,24 +61,19 @@ class ShoeListFragment : Fragment() {
     }
 
     private fun updateShoeList(shoes: List<Shoe>) {
-        val container =
-            binding.shoeListContainer
+        val container = binding.shoeListContainer
         container.removeAllViews()
 
-        for (singleShoe in shoes) {
-            val shoeItemView = TextView(context).apply {
-                text =
-                    "Name: ${singleShoe.name}\n" +
-                            "Company: ${singleShoe.company}\n" +
-                            "Size: ${singleShoe.size}\n---"
-                textSize = 18f
-                setPadding(20, 20, 20, 20)
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-            }
-            container.addView(shoeItemView)
+        for (shoe in shoes) {
+            val itemBinding = ListItemShoeBinding.inflate(
+                layoutInflater,
+                container,
+                false
+            )
+
+            itemBinding.shoe = shoe
+
+            container.addView(itemBinding.root)
         }
     }
 }
